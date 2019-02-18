@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3649FAE8-B3B7-4422-BF82-D8AC3C951370}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CityWEBDataService</RootNamespace>
+    <AssemblyName>CityWEBDataService</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="EnvChecker.cs" />
+    <Compile Include="Model\PandaParam.cs" />
+    <Compile Include="Model\PumpJZ.cs" />
+    <Compile Include="Model\Station.cs" />
+    <Compile Include="WEBPandaPumpSCADAService.cs" />
+    <Compile Include="WEBPandaPumpService.cs" />
+    <Compile Include="WEBPandaYLSacdaService.cs" />
+    <Compile Include="熊猫内部接口\WebPandaPumpScadaCommand.cs" />
+    <Compile Include="WEBPandaZHCDSacdaService.cs" />
+    <Compile Include="熊猫内部接口\WebPandaPumpCommand.cs" />
+    <Compile Include="熊猫内部接口\WebPandaZHCDScadaCommand.cs" />
+    <Compile Include="熊猫内部接口\WebPandaYLScadaCommand.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\CityIoTCommand\CityIoTCommand.csproj">
+      <Project>{D31D2673-102D-44FA-B2B2-45DEB9F139E2}</Project>
+      <Name>CityIoTCommand</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\CityLogService\CityLogService.csproj">
+      <Project>{B8FF9B39-DAED-49C7-98B2-11429007098B}</Project>
+      <Name>CityLogService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\CityPublicClassLib\CityPublicClassLib.csproj">
+      <Project>{7A7F159E-4C38-4D59-BC3B-C2107261F5C4}</Project>
+      <Name>CityPublicClassLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\CityUtils\CityUtils.csproj">
+      <Project>{E4BB15E9-8E95-4993-B755-6DF6054B73F4}</Project>
+      <Name>CityUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if not exist "$(ProjectDir)..\..\..\CityIoTBuild"  md  "$(ProjectDir)..\..\..\CityIoTBuild" 
+</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>Xcopy  $(ProjectDir)bin\Debug  $(ProjectDir)..\..\..\CityIoTBuild  /c /s /e /y
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>
